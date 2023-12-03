@@ -1,5 +1,4 @@
 import pandas as pd
-from tabulate import tabulate
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score  
 from sklearn.metrics import precision_score
@@ -22,6 +21,7 @@ matches['start_code'] = matches['Start'].astype('category').cat.codes
 matches['date_code'] = matches['Date'].dt.day_of_week
 matches['result'] = matches.apply(lambda x: 1 if x['H_Score'] >= x['A_Score'] else 0, axis=1)
 matches['FA'] = matches.apply(lambda x: x['H_Score'] - x['A_Score'], axis=1)
+
 
 rf = RandomForestClassifier(n_estimators=100, min_samples_split=15, random_state=1)
 
