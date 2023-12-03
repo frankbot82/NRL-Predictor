@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
-from sklearn.ensemble import RandomForestClassifier# Load the trained model
+from sklearn.ensemble import RandomForestClassifier
 from data import venue_list, get_venue_code, team_list, rf, get_team_code
 
 venue_l = venue_list
