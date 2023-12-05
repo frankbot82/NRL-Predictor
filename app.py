@@ -1,20 +1,19 @@
 import streamlit as st
 import pandas as pd
 import pickle
-from sklearn.ensemble import RandomForestClassifier
-from data import venue_list, get_venue_code, team_list, rf, get_team_code
+from data import venue_list, get_venue_code, team_list,  get_team_code
 
 venue_l = venue_list
 col1, col2 = st.columns(2)
+
+
 with open('nrl_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+    daveAi = pickle.load(f)
 
 def predict_result(data):
-# Select the features for prediction
-        
-    X = [data]
-    # Make predictions using the trained model
-    predictions = rf.predict(X)
+    column_names  =['venue_code','away_code' ,'home_code', 'date_code', 'H_Odds', 'A_Odds']
+    df = pd.DataFrame([data], columns=column_names)
+    predictions = daveAi.predict(df)
     return predictions
  
 def main():
@@ -39,6 +38,7 @@ def main():
         prediction = st.button('Predict', type='primary')
         if prediction:
             features = [v_code, a_code, h_code, date_code, h_odds, a_odds]
+
             result = predict_result(features)
             if result == 1:
                 info = f'{h_team} win!'

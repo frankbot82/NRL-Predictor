@@ -16,7 +16,7 @@ matches = matches[matches['H_Odds'].notna()]
 matches['Date'] = pd.to_datetime(matches['Date'])
 matches['venue_code'] = matches['Venue'].astype('category').cat.codes
 matches['away_code'] = matches['Away'].astype('category').cat.codes
-matches['home_code'] = matches['Home '].astype('category').cat.codes
+matches['home_code'] = matches['Home'].astype('category').cat.codes
 matches['start_code'] = matches['Start'].astype('category').cat.codes
 matches['date_code'] = matches['Date'].dt.day_of_week
 matches['result'] = matches.apply(lambda x: 1 if x['H_Score'] >= x['A_Score'] else 0, axis=1)
@@ -44,14 +44,14 @@ venue_list = []
 venue_list = matches['Venue'].unique()
 
 team_list = []
-team_list = matches['Home '].unique()
+team_list = matches['Home'].unique()
 
 def get_venue_code(venue):
     code = matches.loc[matches['Venue'] == venue, 'venue_code'].iloc[0]
     return code
 
 def get_team_code(team):
-    code = matches.loc[matches['Home '] == team, 'home_code'].iloc[0]
+    code = matches.loc[matches['Home'] == team, 'home_code'].iloc[0]
 
     return code
 
